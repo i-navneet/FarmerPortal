@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'authentication.dart';
 class FarmersLoginPage extends StatefulWidget {
   @override
   _FarmersLoginPageState createState() => _FarmersLoginPageState();
@@ -8,7 +8,7 @@ class FarmersLoginPage extends StatefulWidget {
 class _FarmersLoginPageState extends State<FarmersLoginPage> {
 
   static final _formKey = GlobalKey<FormState>();
-
+  final Auth _authService=Auth();
   String username, password;
 
   @override
@@ -121,15 +121,24 @@ class _FarmersLoginPageState extends State<FarmersLoginPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Center(
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async{
                               final form = _formKey.currentState;
                               if (form.validate()) {
                                 form.save();
                               }
+                            dynamic result=await _authService.signIn(username, password);
+                            if(result==null)
+                              print("Cannot Sign In");
+                            else {
+                              Navigator.pushNamed(context, '/home_page');
+                              print(result.displayName);
+                            }
+
                             },
                             child: Text('Login',
                               style: TextStyle(
                                 fontSize: 20,
+
                               ),
                             ),
                           ),
@@ -188,7 +197,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
   static final _formKey = GlobalKey<FormState>();
 
   String email, password, firstName, lastName, locality, confPassword;
-
+  final Auth _authService=Auth();
   final _passController = TextEditingController();
 
   @override
@@ -465,11 +474,19 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Center(
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async{
                               final form = _formKey.currentState;
                               if (form.validate()) {
                                 form.save();
+                                dynamic result =await _authService.signUp(email, password, firstName, lastName, locality);
+                                if(result==null)
+                                  print("cannot sign up");
+                              else{
+                                print(result.displayName);
+
                               }
+                              }
+
                             },
                             child: Text('Register',
                               style: TextStyle(

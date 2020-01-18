@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'SecondPage.dart';
 import 'buyer_page.dart';
 import 'farmer_page.dart';
 import 'transport_provider_page.dart';
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
             TransportProviderLoginPage(),
         '/transport_providers_register_page': (context) =>
             TransportProviderRegisterPage(),
+        '/home_page':(context) => MyHomePage(),
       },
     );
   }
