@@ -10,7 +10,7 @@ class _TransportProviderLoginPageState
     extends State<TransportProviderLoginPage> {
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String username, password;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _TransportProviderLoginPageState
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          username = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
@@ -192,6 +192,8 @@ class _TransportProviderRegisterPageState
 
   String email, password, confPassword, firstName, lastName, locality, firmName,
       gstNo;
+
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -415,6 +417,9 @@ class _TransportProviderRegisterPageState
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter password again here';
+                          }
+                          if (value != _passController.text) {
+                            return 'password and confirm password do not match';
                           }
                           return null;
                         },

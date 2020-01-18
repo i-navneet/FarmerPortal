@@ -9,7 +9,7 @@ class _FarmersLoginPageState extends State<FarmersLoginPage> {
 
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String username, password;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _FarmersLoginPageState extends State<FarmersLoginPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          username = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
@@ -188,6 +188,8 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
   static final _formKey = GlobalKey<FormState>();
 
   String email, password, firstName, lastName, locality, confPassword;
+
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -341,6 +343,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                         ),
                       ),
                       TextFormField(
+                        controller: _passController,
                         onSaved: (value) {
                           password = value;
                         },
@@ -411,6 +414,9 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter password again here';
+                          }
+                          if (value != _passController.text) {
+                            return 'password and confirm password do not match';
                           }
                           return null;
                         },

@@ -8,7 +8,7 @@ class BuyersLoginPage extends StatefulWidget {
 class _BuyersLoginPageState extends State<BuyersLoginPage> {
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String username, password;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _BuyersLoginPageState extends State<BuyersLoginPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          username = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
@@ -187,6 +187,8 @@ class _BuyersRegisterPageState extends State<BuyersRegisterPage> {
 
   String email, password, confPassword, firstName, lastName, locality, firmName,
       gstNo;
+
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -410,6 +412,9 @@ class _BuyersRegisterPageState extends State<BuyersRegisterPage> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter password again here';
+                          }
+                          if (value != _passController.text) {
+                            return 'password and confirm password do not match';
                           }
                           return null;
                         },
