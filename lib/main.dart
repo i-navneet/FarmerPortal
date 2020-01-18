@@ -16,8 +16,11 @@ class MyApp extends StatelessWidget {
         '/farmers_login_page': (context) => FarmersLoginPage(),
         '/farmers_register_page': (context) => FarmersRegisterPage(),
         '/buyers_login_page': (context) => BuyersLoginPage(),
+        '/buyers_register_page': (context) => BuyersRegisterPage(),
         '/transport_providers_login_page': (context) =>
             TransportProviderLoginPage(),
+        '/transport_providers_register_page': (context) =>
+            TransportProviderRegisterPage(),
       },
     );
   }
