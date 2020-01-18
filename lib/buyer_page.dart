@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BuyersPage extends StatelessWidget {
+class BuyersLoginPage extends StatefulWidget {
+  @override
+  _BuyersLoginPageState createState() => _BuyersLoginPageState();
+}
 
-  final _formKey = GlobalKey<FormState>();
+class _BuyersLoginPageState extends State<BuyersLoginPage> {
+  static final _formKey = GlobalKey<FormState>();
+
+  String email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -14,111 +20,155 @@ class BuyersPage extends StatelessWidget {
         ),
         body:
         Center(
-          child: Column(
-            children: <Widget>[
-              Text("Login",
-                style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text('Username: ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text("Login",
+                  style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Username: ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your email',
-                        fillColor: Colors.white,
-                        filled: true,
+                      TextFormField(
+                        onSaved: (value) {
+                          email = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email),
+                          hintText: 'Enter your username',
+                          hintStyle: TextStyle(
+                            color: Colors.blue[200],
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[400],
+                              width: 2,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[600],
+                              width: 4,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter username';
+                          }
+                          return null;
+                        },
+
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter email';
-                        }
-                        return null;
-                      },
-                    ),
-                    Text('Password: ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                      Text('Password: ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your password',
-                        fillColor: Colors.white,
-                        filled: true,
+                      TextFormField(
+                        onSaved: (value) {
+                          password = value;
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          hintText: 'Enter your password',
+                          hintStyle: TextStyle(
+                            color: Colors.blue[200],
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[400],
+                              width: 2,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[600],
+                              width: 4,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return null;
+                        },
+                        obscureText: true,
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Center(
-                        child: RaisedButton(
-                          onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
-                            if (_formKey.currentState.validate()) {
-                              // Process data.
-                            }
-                          },
-                          child: Text('Login',
-                            style: TextStyle(
-                              fontSize: 20,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Center(
+                          child: RaisedButton(
+                            onPressed: () {
+                              final form = _formKey.currentState;
+                              if (form.validate()) {
+                                form.save();
+                              }
+                            },
+                            child: Text('Login',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: Center(
-                  child: Text('OR',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: Center(
+                    child: Text('OR',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text("Don\'t have an account?",
-                style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),),
-              SizedBox(height: 50),
-              RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                color: Colors.white,
-                child: Text('Register',
+                Text("Don\'t have an account?",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 26,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
                   ),),
-                onPressed: () {},
-              ),
-            ],
+                SizedBox(height: 30),
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  color: Colors.white,
+                  child: Text('Register',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+                  onPressed: () {},
+                ),
+              ],
+            ),
           ),
         )
     );

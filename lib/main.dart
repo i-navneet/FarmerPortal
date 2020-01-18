@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'farmer_page.dart';
+
 import 'buyer_page.dart';
+import 'farmer_page.dart';
 import 'transport_provider_page.dart';
 
 void main() => runApp(MyApp());
@@ -12,9 +13,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/farmers_page': (context) => FarmersPage(),
-        '/buyers_page': (context) => BuyersPage(),
-        '/transport_providers_page': (context) => TransportProviderPage(),
+        '/farmers_login_page': (context) => FarmersLoginPage(),
+        '/farmers_register_page': (context) => FarmersRegisterPage(),
+        '/buyers_login_page': (context) => BuyersLoginPage(),
+        '/transport_providers_login_page': (context) =>
+            TransportProviderLoginPage(),
       },
     );
   }
@@ -58,7 +61,7 @@ class HomePage extends StatelessWidget {
                 )),
                 color: Colors.blue[600],
                 onPressed: () {
-                  Navigator.pushNamed(context, '/farmers_page');
+                  Navigator.pushNamed(context, '/farmers_login_page');
                 },
               ),
               RaisedButton(
@@ -68,7 +71,7 @@ class HomePage extends StatelessWidget {
                   fontSize: 20,
                 )),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/buyers_page');
+                  Navigator.pushNamed(context, '/buyers_login_page');
                 },
               ),
               RaisedButton(
@@ -78,7 +81,8 @@ class HomePage extends StatelessWidget {
                   fontSize: 20,
                 )),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/transport_providers_page');
+                  Navigator.pushNamed(
+                      context, '/transport_providers_login_page');
                 },
               ),
             ],
