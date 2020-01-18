@@ -190,7 +190,8 @@ class _TransportProviderRegisterPageState
     extends State<TransportProviderRegisterPage> {
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String email, password, confPassword, firstName, lastName, locality, firmName,
+      gstNo;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +225,7 @@ class _TransportProviderRegisterPageState
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          firstName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your first name',
@@ -264,7 +265,7 @@ class _TransportProviderRegisterPageState
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          lastName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your last name',
@@ -386,7 +387,7 @@ class _TransportProviderRegisterPageState
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          password = value;
+                          confPassword = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
@@ -427,7 +428,7 @@ class _TransportProviderRegisterPageState
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          locality = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your locality',
@@ -454,6 +455,84 @@ class _TransportProviderRegisterPageState
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter your locality';
+                          }
+                          return null;
+                        },
+                      ),
+                      Text('Firm\'s Name: ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
+                          firmName = value;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Enter your firm\'s name',
+                          hintStyle: TextStyle(
+                            color: Colors.blue[200],
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[400],
+                              width: 2,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[600],
+                              width: 4,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter your firm\'s name';
+                          }
+                          return null;
+                        },
+                      ),
+                      Text('GST Number: ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
+                          gstNo = value;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Enter your gst number',
+                          hintStyle: TextStyle(
+                            color: Colors.blue[200],
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[400],
+                              width: 2,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.blue[600],
+                              width: 4,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter your gst number';
                           }
                           return null;
                         },

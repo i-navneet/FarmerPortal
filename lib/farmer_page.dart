@@ -187,7 +187,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
 
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String email, password, firstName, lastName, locality, confPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +221,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          firstName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your first name',
@@ -261,7 +261,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          lastName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your last name',
@@ -383,7 +383,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          password = value;
+                          confPassword = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
@@ -424,7 +424,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          locality = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your locality',
