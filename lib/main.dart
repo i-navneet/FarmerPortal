@@ -3,6 +3,7 @@ import 'SecondPage.dart';
 import 'buyer_page.dart';
 import 'farmer_page.dart';
 import 'transport_provider_page.dart';
+import 'splash_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,9 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
         '/': (context) => HomePage(),
+        '/splash': (context) => SplashPage(),
         '/farmers_login_page': (context) => FarmersLoginPage(),
         '/farmers_register_page': (context) => FarmersRegisterPage(),
         '/buyers_login_page': (context) => BuyersLoginPage(),

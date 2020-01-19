@@ -1,4 +1,4 @@
-name: annaporna
+name: annapurna
 description: Smart India Hackathon
 
 # The following defines the version and build number for your application.
@@ -19,6 +19,8 @@ environment:
 dependencies:
   firebase_auth: ^0.15.3+1
   cloud_firestore: ^0.13.0+1
+  simple_animations: any
+  page_transition: any
   flutter:
     sdk: flutter
 
