@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'authentication.dart';
 class FarmersLoginPage extends StatefulWidget {
   @override
   _FarmersLoginPageState createState() => _FarmersLoginPageState();
@@ -8,8 +8,8 @@ class FarmersLoginPage extends StatefulWidget {
 class _FarmersLoginPageState extends State<FarmersLoginPage> {
 
   static final _formKey = GlobalKey<FormState>();
-
-  String email, password;
+  final Auth _authService=Auth();
+  String username, password;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _FarmersLoginPageState extends State<FarmersLoginPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          username = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
@@ -121,15 +121,24 @@ class _FarmersLoginPageState extends State<FarmersLoginPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Center(
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async{
                               final form = _formKey.currentState;
                               if (form.validate()) {
                                 form.save();
                               }
+                            dynamic result=await _authService.signIn(username, password);
+                            if(result==null)
+                              print("Cannot Sign In");
+                            else {
+                              Navigator.pushNamed(context, '/home_page');
+                              print(result.displayName);
+                            }
+
                             },
                             child: Text('Login',
                               style: TextStyle(
                                 fontSize: 20,
+
                               ),
                             ),
                           ),
@@ -187,7 +196,9 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
 
   static final _formKey = GlobalKey<FormState>();
 
-  String email, password;
+  String email, password, firstName, lastName, locality, confPassword;
+  final Auth _authService=Auth();
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +232,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          firstName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your first name',
@@ -261,7 +272,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          lastName = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your last name',
@@ -341,6 +352,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                         ),
                       ),
                       TextFormField(
+                        controller: _passController,
                         onSaved: (value) {
                           password = value;
                         },
@@ -383,7 +395,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          password = value;
+                          confPassword = value;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
@@ -412,6 +424,9 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                           if (value.isEmpty) {
                             return 'Please enter password again here';
                           }
+                          if (value != _passController.text) {
+                            return 'password and confirm password do not match';
+                          }
                           return null;
                         },
                         obscureText: true,
@@ -424,7 +439,7 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                       ),
                       TextFormField(
                         onSaved: (value) {
-                          email = value;
+                          locality = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter your locality',
@@ -459,11 +474,19 @@ class _FarmersRegisterPageState extends State<FarmersRegisterPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Center(
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async{
                               final form = _formKey.currentState;
                               if (form.validate()) {
                                 form.save();
+                                dynamic result =await _authService.signUp(email, password, firstName, lastName, locality);
+                                if(result==null)
+                                  print("cannot sign up");
+                              else{
+                                print(result.displayName);
+
                               }
+                              }
+
                             },
                             child: Text('Register',
                               style: TextStyle(
