@@ -6,6 +6,7 @@ class Buy extends StatefulWidget{
   _BuyState createState() => _BuyState();
 }
 class _BuyState extends State<Buy> {
+  final _formKey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,43 @@ class _BuyState extends State<Buy> {
             SpeedDialChild(
                 child: Icon(Icons.group),
                 label: "Group Buy",
-                onTap: () => print("Group Buy")),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: RaisedButton(
+                                    child: Text("Submitß"),
+                                    onPressed: () {
+                                      if (_formKey.currentState.validate()) {
+                                        _formKey.currentState.save();
+                                      }
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+
+                },
+            ),
             SpeedDialChild(
                 child: Icon(Icons.local_shipping),
                 label: "Transportation",
