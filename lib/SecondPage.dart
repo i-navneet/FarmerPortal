@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'fancy_bottom_navigation.dart';
 import 'second_page.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-//void main() => runApp(MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget{
   @override
@@ -43,49 +44,69 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
 
+      floatingActionButton: SpeedDial(
+          overlayOpacity: 0,
+          curve: Curves.easeInOutSine,
+          animatedIcon: AnimatedIcons.add_event,
+          children: [
+            SpeedDialChild(
+                child: Icon(Icons.group),
+                label: "Group Buy",
+                onTap: () => print("Group Buy")),
+            SpeedDialChild(
+                child: Icon(Icons.local_shipping),
+                label: "Transportation",
+                onTap: () => print("Transportation")),
+            SpeedDialChild(
+                child: Icon(Icons.shopping_cart),
+                label: "Buy",
+                onTap: () => print("Buy")),
+          ]
+      ),
+
       body: Container(
 
-        decoration: BoxDecoration(color: Colors.white),
+          decoration: BoxDecoration(color: Colors.white),
 
-        child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index){
-              return Card(
-                elevation: 8.0,
-                margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(64, 75, 96, 0.9)
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index){
+                return Card(
+                  elevation: 8.0,
+                  margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(64, 75, 96, 0.9)
+                    ),
+                    child: ListTile(
+                        contentPadding: EdgeInsets.symmetric(horizontal:20.0, vertical: 10.0),
+                        leading: Container(
+                          padding: EdgeInsets.only(right: 12.0),
+                          decoration: new BoxDecoration(
+                              border: new Border(
+                                  right: new BorderSide(width: 10.0, color: Colors.white24)
+                              )
+                          ),
+                          child: Icon(Icons.autorenew, color: Colors.white),
+                        ),
+                        title: Text(
+                          "Items",
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Row(
+                          children: <Widget>[
+                            Icon(Icons.linear_scale, color: Colors.yellowAccent),
+                            Text("Intermediate", style: TextStyle(color: Colors.white))
+                          ],
+                        ),
+                        trailing:
+                        Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
+                    ),
                   ),
-                   child: ListTile(
-                     contentPadding: EdgeInsets.symmetric(horizontal:20.0, vertical: 10.0),
-                     leading: Container(
-                       padding: EdgeInsets.only(right: 12.0),
-                       decoration: new BoxDecoration(
-                         border: new Border(
-                           right: new BorderSide(width: 10.0, color: Colors.white24)
-                         )
-                       ),
-                       child: Icon(Icons.autorenew, color: Colors.white),
-                     ),
-                     title: Text(
-                       "Items",
-                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                     ),
-                     subtitle: Row(
-                       children: <Widget>[
-                         Icon(Icons.linear_scale, color: Colors.yellowAccent),
-                         Text("Intermediate", style: TextStyle(color: Colors.white))
-                       ],
-                     ),
-                     trailing:
-                       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
-                   ),
-                ),
-              );
-            })
+                );
+              })
 
       ),
 
